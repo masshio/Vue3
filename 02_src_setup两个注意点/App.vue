@@ -1,5 +1,5 @@
 <template>
-  <Demo/>
+  <Demo :school="true" sc="asd" @test="test"></Demo>
 </template>
 
 <script>
@@ -9,6 +9,16 @@ export default {
   name: 'App',
   components: {
     Demo
+  },
+  setup() {
+    const data = {
+    }
+    function test() {
+      console.log('test');
+    }
+    return {
+      test
+    }
   }
 }
 </script>
