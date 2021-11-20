@@ -1,34 +1,43 @@
 <template>
   <div class="app">
     <div>我是app</div>
-    <son></son>
+    <suspense>
+      <template v-slot:default>
+        <son></son>
+      </template>
+      <template v-slot:fallback>
+          <div>加载中......</div>
+      </template>
+    </suspense>
   </div>
 </template>
 
 <script>
-import Son from './components/Son'
-import {provide, reactive, toRefs} from 'vue'
+// import Son from './components/Son'
+
+import { reactive, toRefs, defineAsyncComponent } from "vue";
+const Son = defineAsyncComponent(() => import("./components/Son"));
+
 export default {
   name: "App",
   setup() {
     const data = reactive({
       x: 1,
-      y: 2
-    })
-    provide('data', data)
-    return{
-      ...toRefs(data)
-    }
+      y: 2,
+    });
+    return {
+      ...toRefs(data),
+    };
   },
   components: {
-    Son
-  }
+    Son,
+  },
 };
 </script>
 
 <style>
-  .app {
-    background: yellowgreen;
-    padding: 20px;
-  }
+.app {
+  background: yellowgreen;
+  padding: 20px;
+}
 </style>
